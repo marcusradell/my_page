@@ -1,0 +1,39 @@
+{
+  "name": "my_page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "build/index.js",
+    "dev": "tsnd --respawn -- src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcusradell/my_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcusradell/my_page/issues"
+  },
+  "homepage": "https://github.com/marcusradell/my_page#readme",
+  "dependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/jest": "^26.0.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.0.13",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "ts-jest": "^26.1.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.9.5"
+  }
+}
