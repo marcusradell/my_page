@@ -3,14 +3,14 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { getEnv } from "./get_env";
+import { env } from "./env";
 
 export const main = () => {
   dotenv.config();
 
-  const port = getEnv("PORT");
-  const jwtSecret = getEnv("JWT_SECRET");
-  const password = getEnv("PASSWORD");
+  const port = env("PORT");
+  const jwtSecret = env("JWT_SECRET");
+  const password = env("PASSWORD");
 
   const app = express();
 

@@ -1,6 +1,6 @@
-type GetEnv = (key: string) => string;
+type Env = (key: string) => string;
 
-export const getEnv: GetEnv = (key) => {
+export const env: Env = (key) => {
   const env = process.env[key];
 
   if (!env) {
