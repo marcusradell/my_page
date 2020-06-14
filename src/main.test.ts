@@ -3,11 +3,11 @@ import jwt from "jsonwebtoken";
 import { main } from "./main";
 import { getEnv } from "./get_env";
 
-test("/status", async () => {
+test("status", async () => {
   const close = await main();
 
   const result = await axios
-    .post("http://localhost:5000/status")
+    .post(`http://localhost:${getEnv("PORT")}/status`)
     .then((res) => res.data)
     .catch((error) => error);
 
@@ -16,17 +16,31 @@ test("/status", async () => {
   expect(result).toEqual({ status: "alive_ready" });
 });
 
-test("/api/identity", async () => {
+test("identity.login:succeeded", async () => {
   const close = await main();
 
-  const { token } = await axios
-    .post("http://localhost:5000/api/identity", {
+  const result = await axios
+    .post(`http://localhost:${getEnv("PORT")}/api/identity`, {
       password: "solradell",
     })
-    .then((res) => res.data)
-    .catch((error) => ({ error, blasted: "noes!" }));
+    .then((res) => res.data);
 
   await close();
 
-  expect(() => jwt.verify(token, getEnv("JWT_SECRET"))).not.toThrow();
+  expect(result.type).toEqual("identity.login:succeeded");
+  expect(() => jwt.verify(result.token, getEnv("JWT_SECRET"))).not.toThrow();
+});
+
+test("identity.login:failed", async () => {
+  const close = await main();
+
+  const result = await axios
+    .post(`http://localhost:${getEnv("PORT")}/api/identity`)
+    .then((res) => res.data);
+
+  await close();
+
+  expect(result).toEqual({
+    type: "identity.login:failed",
+  });
 });

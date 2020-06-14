@@ -32,7 +32,7 @@ export const main = () => {
 
     const token = jwt.sign({}, jwtSecret);
 
-    res.json({ token });
+    res.json({ type: "identity.login:succeeded", token });
   });
 
   return new Promise<() => Promise<void>>((res) => {
