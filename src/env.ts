@@ -1,11 +1,14 @@
-type Env = (key: string) => string;
+import { right, left, Either } from "fp-ts/lib/Either";
+
+export type EnvError = {
+  type: string;
+  key: string;
+};
+
+type Env = (key: string) => Either<EnvError, string>;
 
 export const env: Env = (key) => {
-  const env = process.env[key];
+  const val = process.env[key];
 
-  if (!env) {
-    throw new Error(`Missing env ${key}.`);
-  }
-
-  return env;
+  return val ? right(val) : left({ type: "env:failed", key });
 };
