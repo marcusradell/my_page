@@ -23,7 +23,7 @@ const login: Login = async ({ nickname, password }) => ({
   },
 });
 
-test.skip("Empty nickname and password", async () => {
+test("Empty nickname and password", async () => {
   const result = await login({ nickname: "", password: "" });
 
   expect(result).toEqual({
