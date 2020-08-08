@@ -1,9 +1,9 @@
-import { Result } from "frea-core";
+import { Result, Err } from "frea-core";
 
 type LoginErr = {
   reason: "invalid_request";
   validations: {
-    username: "required";
+    nickname: "required";
     password: "required";
   };
 };
@@ -19,18 +19,20 @@ const login: Login = async ({ nickname, password }) => ({
   status: "failed",
   error: {
     reason: "invalid_request",
-    validations: { password: "required", username: "required" },
+    validations: { password: "required", nickname: "required" },
   },
 });
 
 test("Empty nickname and password", async () => {
   const result = await login({ nickname: "", password: "" });
 
-  expect(result).toEqual({
+  const expectation: Err<LoginErr> = {
     status: "failed",
     error: {
       reason: "invalid_request",
-      validations: { username: "required", password: "required" },
+      validations: { nickname: "required", password: "required" },
     },
-  });
+  };
+
+  expect(result).toEqual(expectation);
 });
