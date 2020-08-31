@@ -1,6 +1,7 @@
 import { Result } from "frea-core";
 import { IdentityApi } from "./types";
 import * as Api from "./api";
+export * from "./types";
 
 type Create = () => IdentityApi;
 

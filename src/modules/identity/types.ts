@@ -17,10 +17,10 @@ export type Login = (args: {
   password: string;
 }) => Result<LoginOk, LoginErr>;
 
-export type VerifyOk = null;
+export type VerifyOk = void;
 
 export type VerifyErr = {
-  reason: "unknown";
+  reason: "invalid_token";
 };
 
 export type Verify = (args: { token: string }) => Result<VerifyOk, VerifyErr>;
