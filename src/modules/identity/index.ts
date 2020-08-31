@@ -1,26 +1,11 @@
-import { env } from "../../env";
-import { Express } from "express";
-import jwt from "jsonwebtoken";
-import { pipe } from "fp-ts/lib/pipeable";
-import { chain, right, either } from "fp-ts/lib/Either";
-import { sequenceT } from "fp-ts/lib/Apply";
+import { Result } from "frea-core";
+import { IdentityApi } from "./types";
+import * as Api from "./api";
 
-export const create = (app: Express) =>
-  pipe(
-    sequenceT(either)(env("JWT_SECRET"), env("PASSWORD")),
-    chain(([jwtSecret, password]) => {
-      app.post("/api/identity", (req, res) => {
-        if (req.body.password !== password) {
-          return res.json({
-            type: "identity.login:failed",
-          });
-        }
+type Create = () => IdentityApi;
 
-        const token = jwt.sign({}, jwtSecret);
+export const create: Create = () => {
+  const api = Api.create();
 
-        res.json({ type: "identity.login:succeeded", token });
-      });
-
-      return right(null);
-    })
-  );
+  return api;
+};

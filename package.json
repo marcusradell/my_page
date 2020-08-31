@@ -6,7 +6,10 @@
   "scripts": {
     "test": "jest",
     "start": "build/index.js",
-    "dev": "tsnd --respawn -- src/index.ts"
+    "dev": "tsnd --respawn -- src/index.ts",
+    "commit": "git add -A; timestamp=$(date \"+%c\") && git commit -m \"TCR @ $timestamp\";",
+    "revert": "git reset --hard",
+    "tcr": "npm test && npm run commit || npm run revert"
   },
   "repository": {
     "type": "git",
@@ -30,8 +33,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "fp-ts": "^2.6.6",
-    "io-ts": "^2.2.6",
+    "frea-core": "^1.7.0",
     "jest": "^26.0.1",
     "jsonwebtoken": "^8.5.1",
     "ts-jest": "^26.1.0",
